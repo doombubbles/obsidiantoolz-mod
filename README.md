@@ -1,9 +1,5 @@
-# Fabric Example Mod
+# ObsidianToolz Mod
 
 ## Setup
 
-For setup instructions please see the [fabric wiki page](https://fabricmc.net/wiki/tutorial:setup) that relates to the IDE that you are using.
-
-## License
-
-This template is available under the CC0 license. Feel free to learn from it and incorporate it in your own projects.
+Use the mod jar on a fabric minecraft server, with the world including the datapack(s), and the resource pack as the default server resource pack
