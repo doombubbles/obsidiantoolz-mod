@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XX",
+    "X#",
+    " #"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:blaze_rod"
+    },
+    "X": {
+      "item": "minecraft:obsidian"
+    }
+  },
+  "result": {
+    "item": "minecraft:diamond_axe",
+    "data": {
+      "display": {
+        "Name": "{\"text\":\"Obsidian Axe\",\"italic\":false}"
+      },
+      "CustomModelData": 1
+    }
+  }
+}

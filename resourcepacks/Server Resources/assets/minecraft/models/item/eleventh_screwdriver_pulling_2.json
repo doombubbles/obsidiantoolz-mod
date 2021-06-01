@@ -1,0 +1,6 @@
+{
+    "parent": "item/bow",
+    "textures": {
+        "layer0": "item/eleventh_screwdriver/eleventh_screwdriver_pulling_2"
+    }
+}

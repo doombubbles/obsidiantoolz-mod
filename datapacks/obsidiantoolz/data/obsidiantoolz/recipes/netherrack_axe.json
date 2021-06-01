@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XX",
+    "X#",
+    " #"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:stick"
+    },
+    "X": {
+      "item": "minecraft:netherrack"
+    }
+  },
+  "result": {
+    "item": "minecraft:stone_axe",
+    "data": {
+      "display": {
+        "Name": "{\"text\":\"Netherrack Axe\",\"italic\":false}"
+      },
+      "CustomModelData": 1
+    }
+  }
+}

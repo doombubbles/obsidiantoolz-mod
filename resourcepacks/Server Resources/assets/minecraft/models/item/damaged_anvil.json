@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:block/damaged_anvil",
+  "overrides": [
+    {
+      "predicate": {
+          "custom_model_data": 1
+      },
+      "model": "block/damaged_netherite_anvil"
+    }
+  ]
+}

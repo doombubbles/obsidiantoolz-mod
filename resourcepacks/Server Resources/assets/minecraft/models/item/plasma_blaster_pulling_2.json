@@ -1,0 +1,6 @@
+{
+    "parent": "item/bow",
+    "textures": {
+        "layer0": "item/plasma_blaster/plasma_blaster_pulling_2"
+    }
+}

@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WoW",
+    "WWW",
+    " W "
+  ],
+  "key": {
+    "W": {
+      "item": "minecraft:obsidian"
+    },
+    "o": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "item": "minecraft:shield",
+    "data": {
+      "display": {
+        "Name": "{\"text\":\"Obsidian Shield\",\"italic\":false}"
+      },
+      "CustomModelData": 1
+    }
+  }
+}

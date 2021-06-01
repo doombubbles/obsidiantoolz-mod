@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    " # ",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:stick"
+    },
+    "X": {
+      "item": "minecraft:quartz_block"
+    }
+  },
+  "result": {
+    "item": "minecraft:iron_pickaxe",
+    "data": {
+      "display": {
+        "Name": "{\"text\":\"Quartz Pickaxe\",\"italic\":false}"
+      },
+      "CustomModelData": 1
+    }
+  }
+}

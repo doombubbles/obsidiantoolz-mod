@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X",
+    "X",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:stick"
+    },
+    "X": {
+      "item": "minecraft:quartz_block"
+    }
+  },
+  "result": {
+    "item": "minecraft:iron_sword",
+    "data": {
+      "display": {
+        "Name": "{\"text\":\"Quartz Sword\",\"italic\":false}"
+      },
+      "CustomModelData": 1
+    }
+  }
+}

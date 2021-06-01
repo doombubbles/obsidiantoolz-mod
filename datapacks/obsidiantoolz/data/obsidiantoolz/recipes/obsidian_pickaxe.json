@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    " # ",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:blaze_rod"
+    },
+    "X": {
+      "item": "minecraft:obsidian"
+    }
+  },
+  "result": {
+    "item": "minecraft:diamond_pickaxe",
+    "data": {
+      "display": {
+        "Name": "{\"text\":\"Obsidian Pickaxe\",\"italic\":false}"
+      },
+      "CustomModelData": 1
+    }
+  }
+}

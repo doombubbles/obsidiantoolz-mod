@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    " # ",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:stick"
+    },
+    "X": {
+      "item": "minecraft:netherrack"
+    }
+  },
+  "result": {
+    "item": "minecraft:stone_pickaxe",
+    "data": {
+      "display": {
+        "Name": "{\"text\":\"Netherrack Pickaxe\",\"italic\":false}"
+      },
+      "CustomModelData": 1
+    }
+  }
+}

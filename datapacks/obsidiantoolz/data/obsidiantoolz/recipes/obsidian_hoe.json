@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XX",
+    " #",
+    " #"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:blaze_rod"
+    },
+    "X": {
+      "item": "minecraft:obsidian"
+    }
+  },
+  "result": {
+    "item": "minecraft:diamond_hoe",
+    "data": {
+      "display": {
+        "Name": "{\"text\":\"Obsidian Hoe\",\"italic\":false}"
+      },
+      "CustomModelData": 1
+    }
+  }
+}

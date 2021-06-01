@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  #",
+    " #X",
+    "#  "
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "X": {
+      "item": "minecraft:cobweb"
+    }
+  },
+  "result": {
+    "item": "minecraft:carrot_on_a_stick",
+    "data": {
+      "display": {
+        "Name": "{\"text\":\"Bug Net\",\"italic\":false}"
+      },
+      "CustomModelData": 1
+    }
+  }
+}

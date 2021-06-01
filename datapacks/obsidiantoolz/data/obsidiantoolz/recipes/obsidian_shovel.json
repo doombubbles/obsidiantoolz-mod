@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X",
+    "#",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:blaze_rod"
+    },
+    "X": {
+      "item": "minecraft:obsidian"
+    }
+  },
+  "result": {
+    "item": "minecraft:diamond_shovel",
+    "data": {
+      "display": {
+        "Name": "{\"text\":\"Obsidian Shovel\",\"italic\":false}"
+      },
+      "CustomModelData": 1
+    }
+  }
+}

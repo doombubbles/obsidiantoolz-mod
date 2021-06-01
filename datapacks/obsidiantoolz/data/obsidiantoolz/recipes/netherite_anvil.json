@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "III",
+    " i ",
+    "iii"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:netherite_block"
+    },
+    "i": {
+      "item": "minecraft:netherite_ingot"
+    }
+  },
+  "result": {
+    "item": "minecraft:anvil",
+    "data": {
+      "display": {
+        "Name": "{\"text\":\"Netherite Anvil\",\"italic\":false}"
+      },
+      "CustomModelData": 1
+    }
+  }
+}

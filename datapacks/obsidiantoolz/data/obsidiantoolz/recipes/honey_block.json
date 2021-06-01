@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "S S",
+    "   ",
+    "S S"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:honey_bottle",
+      "remainder": {
+        "item": "minecraft:glass_bottle",
+        "data": {
+          "Count": "$ i0.Count"
+        }
+      }
+    }
+  },
+  "result": {
+    "item": "minecraft:honey_block"
+  }
+}

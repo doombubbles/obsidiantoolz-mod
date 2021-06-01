@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DBD",
+    "N N"
+  ],
+  "key": {
+    "B": {
+      "item": "minecraft:leather_boots"
+    },
+    "D": {
+      "item": "minecraft:dragon_breath"
+    },
+    "N": {
+      "item": "minecraft:netherite_scrap"
+    }
+  },
+  "result": {
+    "item": "minecraft:leather_boots",
+    "data": {
+      "CustomModelData": 1,
+      "display": {
+        "color": 12078384,
+        "Name": "{\"text\":\"Rocket Boots\",\"italic\":false}"
+      }
+    }
+  }
+}

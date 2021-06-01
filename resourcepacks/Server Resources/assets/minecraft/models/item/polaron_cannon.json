@@ -1,0 +1,6 @@
+{
+    "parent": "item/bow",
+    "textures": {
+        "layer0": "item/polaron_cannon/polaron_cannon"
+    }
+}
