@@ -29,10 +29,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(Block.class)
 public class BlockMixin
 {
-    @Inject(at = @At("HEAD"),method = "onBreak",cancellable = false)
+    @Inject(at = @At("HEAD"), method = "onBreak")
     public void doVeinMine(World world, BlockPos blockPos, BlockState blockState, PlayerEntity pe, CallbackInfo ci)
     {
-        VeinMinerEnchantment.tryVeinMining(world, blockPos, blockState, pe);
+        VeinMinerEnchantment.tryVeinMining(world, blockPos, blockState, pe, null, null);
     }
 
 

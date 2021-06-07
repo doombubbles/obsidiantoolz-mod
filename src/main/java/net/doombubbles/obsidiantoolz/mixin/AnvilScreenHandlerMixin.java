@@ -1,8 +1,8 @@
 package net.doombubbles.obsidiantoolz.mixin;
 
-import net.doombubbles.obsidiantoolz.Enchantments.MuggingEnchantment;
-import net.doombubbles.obsidiantoolz.Enchantments.SpaceEnchantment;
+import net.doombubbles.obsidiantoolz.Enchantments.*;
 import net.doombubbles.obsidiantoolz.Items.BugNet;
+import net.doombubbles.obsidiantoolz.Items.ObsidianStuff;
 import net.minecraft.block.AnvilBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.enchantment.*;
@@ -142,6 +142,11 @@ public class AnvilScreenHandlerMixin extends ForgingScreenHandler {
                         return;
                     }
 
+                    if (ObsidianStuff.is(itemStack2) != ObsidianStuff.is(itemStack3) && itemStack3.getItem() != Items.ENCHANTED_BOOK) {
+                        return;
+                    }
+
+
                     if (itemStack2.isDamageable() && !bl) {
                         o = itemStack.getMaxDamage() - itemStack.getDamage();
                         p = itemStack3.getMaxDamage() - itemStack3.getDamage();
@@ -183,12 +188,12 @@ public class AnvilScreenHandlerMixin extends ForgingScreenHandler {
                         int u = (Integer)map2.get(enchantment);
                         u = t == u ? u + 1 : Math.max(u, t);
                         boolean bl4 = enchantment.isAcceptableItem(itemStack);
-                        if (enchantment instanceof InfinityEnchantment && itemStack.getItem() instanceof ElytraItem) bl4 = true;
+                        if (enchantment instanceof InfinityEnchantment && itemStack.getItem() instanceof ElytraItem && isNetherite()) bl4 = true;
                         if (enchantment instanceof InfinityEnchantment && itemStack.getItem() instanceof CrossbowItem) bl4 = true;
                         if (enchantment instanceof PowerEnchantment && itemStack.getItem() instanceof CrossbowItem) bl4 = true;
                         if (enchantment instanceof SpaceEnchantment && itemStack.getItem() instanceof CrossbowItem) bl4 = true;
                         if (enchantment instanceof PiercingEnchantment && itemStack.getItem() instanceof BowItem) bl4 = true;
-                        if (enchantment instanceof ProtectionEnchantment && itemStack.getItem() instanceof ElytraItem && isNetherite()) bl4 = true;
+                        // if (enchantment instanceof ProtectionEnchantment && itemStack.getItem() instanceof ElytraItem && isNetherite()) bl4 = true;
                         if (enchantment instanceof MuggingEnchantment && itemStack.getItem() instanceof ShearsItem) bl4 = true;
                         if (enchantment instanceof MuggingEnchantment && BugNet.is(itemStack)) bl4 = true;
                         if (enchantment instanceof InfinityEnchantment && (itemStack.getItem() instanceof BucketItem || itemStack.getItem() instanceof MilkBucketItem) && isNetherite()) {
@@ -201,17 +206,40 @@ public class AnvilScreenHandlerMixin extends ForgingScreenHandler {
 
                         for (Enchantment enchantment2 : map.keySet()) {
                             if (enchantment2 != enchantment && (!enchantment.canCombine(enchantment2) || !enchantment2.canCombine(enchantment))) {
-                                if (!isNetherite()) {
-                                    bl4 = false;
-                                }
                                 ++i;
-                            }
-                            if (enchantment instanceof PiercingEnchantment && enchantment2 instanceof PowerEnchantment
+                                if (isNetherite()) {
+                                    if (enchantment instanceof SmeltTouchEnchantment && enchantment2 instanceof SilkTouchEnchantment
+                                    || enchantment2 instanceof SmeltTouchEnchantment && enchantment instanceof SilkTouchEnchantment) {
+                                        continue;
+                                    }
+
+                                    if (enchantment instanceof ExpertiseEnchantment && enchantment2 instanceof LuckEnchantment
+                                    || enchantment2 instanceof ExpertiseEnchantment && enchantment instanceof LuckEnchantment) {
+                                        continue;
+                                    }
+
+                                    if (enchantment instanceof GrindingEnchantment && enchantment2 instanceof LuckEnchantment
+                                    || enchantment2 instanceof GrindingEnchantment && enchantment instanceof LuckEnchantment) {
+                                        continue;
+                                    }
+
+                                    /*
+                                    if (enchantment instanceof PiercingEnchantment && enchantment2 instanceof PowerEnchantment
                                     || enchantment2 instanceof PiercingEnchantment && enchantment instanceof PowerEnchantment) {
-                                if (!isNetherite()) {
-                                    bl4 = false;
+                                        continue;
+                                    }
+                                    */
+
+                                    if (enchantment instanceof MendingEnchantment && enchantment2 instanceof InfinityEnchantment
+                                    || enchantment2 instanceof MendingEnchantment && enchantment instanceof InfinityEnchantment) {
+                                        if (itemStack2.getItem() != Items.ELYTRA) {
+                                            continue;
+                                        }
+                                    }
+
+
                                 }
-                                ++i;
+                                bl4 = false;
                             }
                         }
 

@@ -69,9 +69,9 @@ public class SmeltTouchEnchantment extends ObsidianToolzEnchantment {
             LootTable loottTable = serverworld.getServer().getLootManager().getTable(loottableId);
             List<ItemStack> stacks = loottTable.generateLoot(lootBuilder.build(LootContextTypes.BLOCK));
             RecipeManager rm = player.world.getRecipeManager();
-            Inventory basicInv = new SimpleInventory();
+            Inventory basicInv;
 
-            ItemStack itemToBeChecked = ItemStack.EMPTY;
+            ItemStack itemToBeChecked;
             Optional<SmeltingRecipe> smeltingResult;
             for(int stacksIndex = 0; stacksIndex < stacks.size(); stacksIndex++)
             {
@@ -90,13 +90,12 @@ public class SmeltTouchEnchantment extends ObsidianToolzEnchantment {
                             }
                             count *= (i + 1);
                         }
-                        if (level > 1) {
-                            int expertiseLevel = EnchantmentHelper.getLevel(ObsidianToolzMod.EXPERTISE, tool);
-                            int xp = Math.round(smeltingResult.get().getExperience() * (expertiseLevel + 1));
-
-                            serverworld.spawnEntity(new ExperienceOrbEntity(serverworld, player.getX(), player.getY(), player.getZ(), xp));
-                        }
                     }
+
+                    int expertiseLevel = EnchantmentHelper.getLevel(ObsidianToolzMod.EXPERTISE, tool);
+                    int xp = Math.round(smeltingResult.get().getExperience() * (expertiseLevel + 1));
+                    ExperienceOrbEntity.spawn(serverworld, player.getPos(), xp * count);
+
                     stacks.set(stacksIndex, new ItemStack(smeltingResult.get().getOutput().getItem(), count));
                     //serverworld.spawnEntity(new ExperienceOrbEntity(serverworld, player.getX(), player.getY(), player.getZ(), (int)smeltingResult.get().getExperience() * itemToBeChecked.getCount()));
                     //serverworld.playSound((PlayerEntity)null, blockState.pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.1f, 0.1f);

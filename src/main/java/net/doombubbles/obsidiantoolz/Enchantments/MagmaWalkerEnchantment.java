@@ -9,6 +9,7 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.BlockPos;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -38,7 +39,7 @@ public class MagmaWalkerEnchantment extends ObsidianToolzEnchantment {
         return "Magma Walker " + toRoman(level);
     }
 
-    public static void doMagmaWalker(BlockPos blockPos, LivingEntity entity, int level, Set<BlockPos> magmas) {
+    public static void doMagmaWalker(BlockPos blockPos, LivingEntity entity, int level, Collection<BlockPos> magmas) {
         BlockState blockState = Blocks.MAGMA_BLOCK.getDefaultState();
         float f = (float)Math.min(16, 2 + level);
         BlockPos.Mutable mutable = new BlockPos.Mutable();
@@ -52,8 +53,8 @@ public class MagmaWalkerEnchantment extends ObsidianToolzEnchantment {
                 if (blockState2.isAir()) {
                     BlockState blockState3 = entity.world.getBlockState(blockPos2);
                     if (blockState3.getMaterial() == Material.LAVA && (Integer)blockState3.get(FluidBlock.LEVEL) == 0 && blockState.canPlaceAt(entity.world, blockPos2) && entity.world.canPlace(blockState, blockPos2, ShapeContext.absent())) {
+                        magmas.add(blockPos2.toImmutable());
                         entity.world.setBlockState(blockPos2, blockState);
-                        magmas.add(blockPos2);
                     }
                 }
             }

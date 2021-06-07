@@ -1,5 +1,6 @@
 package net.doombubbles.obsidiantoolz.mixin;
 
+import net.doombubbles.obsidiantoolz.Items.ObsidianStuff;
 import net.doombubbles.obsidiantoolz.ObsidianToolzMod;
 import net.minecraft.block.BlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -19,14 +20,17 @@ import net.minecraft.screen.SmithingScreenHandler;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.List;
 import java.util.Map;
 
 @Mixin(SmithingScreenHandler.class)
-public class SmithingScreenHandlerMixin /*extends ForgingScreenHandler*/ {
+public class SmithingScreenHandlerMixin extends ForgingScreenHandler {
 
-    /*
+
     @Final
     @Shadow
     private List<SmithingRecipe> field_25668;
@@ -35,10 +39,10 @@ public class SmithingScreenHandlerMixin /*extends ForgingScreenHandler*/ {
         super(type, syncId, playerInventory, context);
     }
 
-    @Override
+    @Shadow
     public boolean canTakeOutput(PlayerEntity player, boolean present) {
-        return (RECIPES.containsKey(this.input.getStack(0).getItem()) && this.input.getStack(1).getItem() == Items.NETHERITE_INGOT)
-                || customCombine(this.input.getStack(0), this.input.getStack(1)) != null;
+        return true;/*(RECIPES.containsKey(this.input.getStack(0).getItem()) && this.input.getStack(1).getItem() == Items.NETHERITE_INGOT)
+                || customCombine(this.input.getStack(0), this.input.getStack(1)) != null;*/
     }
 
     @Shadow
@@ -51,9 +55,18 @@ public class SmithingScreenHandlerMixin /*extends ForgingScreenHandler*/ {
         return true;
     }
 
-    @Override
+
+    @Inject(method = "updateResult", at = @At("RETURN"))
+    public void changeUpdateResult(CallbackInfo ci) {
+        if (ObsidianStuff.is(this.input.getStack(0)) && this.input.getStack(1).getItem() == Items.NETHERITE_INGOT) {
+            this.output.setStack(0, ItemStack.EMPTY);
+        }
+    }
+
+
+    @Shadow
     public void updateResult() {
-        ItemStack itemStack = this.input.getStack(0);
+        /*ItemStack itemStack = this.input.getStack(0);
         ItemStack itemStack2 = this.input.getStack(1);
         Item item = (Item)RECIPES.get(itemStack.getItem());
         if (itemStack2.getItem() == Items.NETHERITE_INGOT && item != null) {
@@ -63,7 +76,7 @@ public class SmithingScreenHandlerMixin /*extends ForgingScreenHandler*/ {
             this.output.setStack(0, itemStack3);
         } else {
             this.output.setStack(0, customCombine(itemStack, itemStack2));
-        }
+        }*/
     }
 
     public ItemStack customCombine(ItemStack itemStack1, ItemStack itemStack2) {
@@ -91,5 +104,5 @@ public class SmithingScreenHandlerMixin /*extends ForgingScreenHandler*/ {
         }
 
         return ItemStack.EMPTY;
-    }*/
+    }
 }

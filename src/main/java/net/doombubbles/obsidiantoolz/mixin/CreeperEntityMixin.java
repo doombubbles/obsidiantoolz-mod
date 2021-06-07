@@ -20,6 +20,9 @@ public class CreeperEntityMixin {
 
     @Inject(at = @At("HEAD"), method = "dropEquipment")
     protected void doSpecialDrops(DamageSource source, int lootingMultiplier, boolean allowDrops, CallbackInfo info) {
+        if (true) { // Zeus disabled right now
+            return;
+        }
         LivingEntity thisEntity = (LivingEntity) (Object) this;
         if (((CreeperEntity) (Object) this).shouldRenderOverlay() && allowDrops && !source.isProjectile() && !source.isMagic() && !source.isFire() && source.getAttacker() instanceof PlayerEntity) {
             if (thisEntity.getRandom().nextInt(10) <= lootingMultiplier) {

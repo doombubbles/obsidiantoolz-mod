@@ -13,6 +13,6 @@ public class PillagerEntityMixin {
 
     @Inject(at = @At("TAIL"), method = "addBonusForWave")
     public void addBonusForWave(int wave, boolean unused, CallbackInfo cI) {
-        CustomRaidStuff.pillagerBonus((RaiderEntity)(Object)this);
+        //CustomRaidStuff.pillagerBonus((RaiderEntity)(Object)this);
     }
 }

@@ -7,6 +7,8 @@ import net.doombubbles.obsidiantoolz.ObsidianToolzEnchantment;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
+import net.minecraft.network.packet.s2c.play.OverlayMessageS2CPacket;
+import net.minecraft.network.packet.s2c.play.ScoreboardDisplayS2CPacket;
 import net.minecraft.network.packet.s2c.play.TitleS2CPacket;
 import net.minecraft.screen.EnchantmentScreenHandler;
 import net.minecraft.screen.ScreenHandlerContext;
@@ -51,7 +53,8 @@ public class EnchantmentScreenHandlerMixin {
                 if (closestPlayer instanceof ServerPlayerEntity) {
                     ServerPlayerEntity serverPlayerEntity = (ServerPlayerEntity) closestPlayer;
 
-                    serverPlayerEntity.networkHandler.sendPacket(new TitleS2CPacket(new LiteralText(getFromEnchantments(enchantmentList))));
+
+                    serverPlayerEntity.networkHandler.sendPacket(new OverlayMessageS2CPacket(new LiteralText(getFromEnchantments(enchantmentList))));
                 }
             }
         });

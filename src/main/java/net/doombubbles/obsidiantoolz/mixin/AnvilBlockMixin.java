@@ -4,12 +4,14 @@ import net.doombubbles.obsidiantoolz.Items.NetheriteAnvil;
 import net.minecraft.block.AnvilBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.FallingBlockEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.Direction;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(AnvilBlock.class)
@@ -53,6 +55,23 @@ public class AnvilBlockMixin extends Block {
         }
         callbackInfoReturnable.setReturnValue(this.getDefaultState().with(AnvilBlock.FACING, direction));
         callbackInfoReturnable.cancel();
+    }
+
+
+    @Inject(at = @At("HEAD"), method = "configureFallingBlockEntity", cancellable = true)
+    protected void configureFallingBlockEntity(FallingBlockEntity entity, CallbackInfo ci) {
+        if (NetheriteAnvil.blockIs(entity.getBlockState())) {
+            entity.setHurtEntities(5.0F, 100);
+            ci.cancel();
+        }
+    }
+
+
+    @Inject(at = @At("HEAD"), method = "getLandingState", cancellable = true)
+    private static void getLandingState(BlockState fallingState, CallbackInfoReturnable<BlockState> cir) {
+        if (NetheriteAnvil.blockIs(fallingState)) {
+            cir.setReturnValue(fallingState);
+        }
     }
 
 

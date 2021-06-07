@@ -13,6 +13,6 @@ public class VindicatorEntityMixin {
 
     @Inject(at = @At("TAIL"), method = "addBonusForWave")
     public void addBonusForWave(int wave, boolean unused, CallbackInfo cI) {
-        CustomRaidStuff.vindicatorBonus((RaiderEntity)(Object)this);
+        //CustomRaidStuff.vindicatorBonus((RaiderEntity)(Object)this);
     }
 }

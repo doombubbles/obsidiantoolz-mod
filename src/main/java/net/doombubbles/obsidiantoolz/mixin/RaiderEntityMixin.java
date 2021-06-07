@@ -18,7 +18,7 @@ public class RaiderEntityMixin {
     @Inject(at = @At("TAIL"), method = "initialize")
     public void addBonusForWave(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, EntityData entityData, NbtCompound entityNbt, CallbackInfoReturnable<EntityData> cir) {
         if (spawnReason == SpawnReason.EVENT) {
-            CustomRaidStuff.bonus((RaiderEntity)(Object)this);
+            //CustomRaidStuff.bonus((RaiderEntity)(Object)this);
         }
     }
 }

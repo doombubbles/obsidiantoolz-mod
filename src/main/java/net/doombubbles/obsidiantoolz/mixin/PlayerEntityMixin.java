@@ -72,13 +72,16 @@ public class PlayerEntityMixin extends LivingEntity {
         }
     }
 
+    /*
 
-
+    @Inject(at=@At("HEAD"), method = "getXpToDrop", cancellable = true)
     public void dropXp(PlayerEntity player, CallbackInfoReturnable<Integer> cI) {
         if (!this.world.getGameRules().getBoolean(GameRules.KEEP_INVENTORY) && !this.isSpectator()) {
             cI.setReturnValue(totalExperience / 2);
         }
     }
+
+    */
 
     @Shadow
     public Iterable<ItemStack> getArmorItems() {

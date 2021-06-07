@@ -7,6 +7,9 @@ import net.minecraft.item.Items;
 public class ObsidianStuff {
 
     public static boolean is(ItemStack stack) {
+        if (stack == null || stack.isEmpty()) {
+            return false;
+        }
         if (stack.getTag() == null || stack.getTag().get("CustomModelData") == null || stack.getTag().getInt("CustomModelData") != 1) {
             return false;
         }

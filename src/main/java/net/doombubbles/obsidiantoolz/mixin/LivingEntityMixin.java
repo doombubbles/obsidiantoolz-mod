@@ -31,7 +31,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Mixin(LivingEntity.class)
@@ -49,7 +51,6 @@ public class LivingEntityMixin extends Entity {
     @Shadow
     protected void dropXp() {}
 
-    public Set<BlockPos> magmas = new HashSet<>();
 
     @Inject(at = @At("TAIL"), method = "drop")
     protected void doGrinding(DamageSource source, CallbackInfo callbackInfo) {
@@ -67,6 +68,63 @@ public class LivingEntityMixin extends Entity {
             }
         }
     }
+
+    public int lastOverprotectionAmount = 0;
+
+
+
+
+    public Set<BlockPos> magmas = new HashSet<>();
+
+    @Inject(at = @At("HEAD"), method = "tick")
+    public void tick(CallbackInfo info) {
+        LivingEntity entity = (LivingEntity) (Object) this;
+
+        for (BlockPos pos : magmas) {
+            if (entity.getRandom().nextInt(30) == 0 && entity.world.getBlockState(pos).getBlock() == Blocks.MAGMA_BLOCK) {
+                entity.world.setBlockState(pos, Blocks.LAVA.getDefaultState());
+            }
+        }
+        magmas.removeIf(pos -> {
+            if (entity.world.getBlockState(pos).getBlock() != Blocks.MAGMA_BLOCK) {
+                return true;
+            }
+            return false;
+        });
+
+        lastOverprotectionAmount = OverprotectionEnchantment.doOverprotection(entity, lastOverprotectionAmount);
+
+    }
+
+    @Inject(at = @At("TAIL"), method = "applyMovementEffects")
+    public void magmaWalker(BlockPos blockPos, CallbackInfo callbackInfo) {
+        LivingEntity entity = (LivingEntity) (Object)this;
+        int level = EnchantmentHelper.getEquipmentLevel(ObsidianToolzMod.MAGMA_WALKER, entity);
+
+        if (entity.isOnGround() && level > 0) {
+            MagmaWalkerEnchantment.doMagmaWalker(blockPos, entity, level, magmas);
+        }
+    }
+
+
+
+
+
+    public PlayerEntity mugger = null;
+
+    @Inject(at = @At("HEAD"), method = "damage")
+    public void preHurt(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cI) {
+        if (source.getAttacker() instanceof PlayerEntity && EnchantmentHelper.getEquipmentLevel(ObsidianToolzMod.MUGGING, (PlayerEntity) source.getAttacker()) > 0) {
+            mugger = (PlayerEntity) source.getAttacker();
+        }
+    }
+
+    @Inject(at = @At("TAIL"), method = "damage")
+    public void postHurt(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cI) {
+        mugger = null;
+    }
+
+
     /*
     protected void doSpecialDrops(DamageSource source, int lootingMultiplier, boolean allowDrops, CallbackInfo info) {
         LivingEntity thisEntity = (LivingEntity)(Object)this;
@@ -114,50 +172,6 @@ public class LivingEntityMixin extends Entity {
         }
     }
     */
-
-
-
-    public int lastOverprotectionAmount = 0;
-
-    @Inject(at = @At("TAIL"), method = "tick")
-    public void tick(CallbackInfo info) {
-        LivingEntity entity = (LivingEntity) (Object) this;
-        magmas.removeIf(blockPos -> {
-            if (entity.world.random.nextInt(60) == 0) {
-                if (entity.world.getBlockState(blockPos).getBlock() == Blocks.MAGMA_BLOCK && !entity.world.isClient()) {
-                    entity.world.setBlockState(blockPos, Blocks.LAVA.getDefaultState());
-                }
-                return true;
-            }
-            return false;
-        });
-        lastOverprotectionAmount = OverprotectionEnchantment.doOverprotection(entity, lastOverprotectionAmount);
-
-    }
-
-
-    @Inject(at = @At("TAIL"), method = "applyMovementEffects")
-    public void magmaWalker(BlockPos blockPos, CallbackInfo callbackInfo) {
-        LivingEntity entity = (LivingEntity) (Object)this;
-        int level = EnchantmentHelper.getEquipmentLevel(ObsidianToolzMod.MAGMA_WALKER, entity);
-        if (entity.isOnGround() && level > 0) {
-            MagmaWalkerEnchantment.doMagmaWalker(blockPos, entity, level, magmas);
-        }
-    }
-
-    public PlayerEntity mugger = null;
-
-    @Inject(at = @At("HEAD"), method = "damage")
-    public void preHurt(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cI) {
-        if (source.getAttacker() instanceof PlayerEntity && EnchantmentHelper.getEquipmentLevel(ObsidianToolzMod.MUGGING, (PlayerEntity) source.getAttacker()) > 0) {
-            mugger = (PlayerEntity) source.getAttacker();
-        }
-    }
-
-    @Inject(at = @At("TAIL"), method = "damage")
-    public void postHurt(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cI) {
-        mugger = null;
-    }
 
 
     @Shadow
